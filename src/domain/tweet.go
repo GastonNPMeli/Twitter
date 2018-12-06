@@ -3,6 +3,7 @@ package domain
 import "time"
 
 type Tweet struct {
+	TweetId int
 	User string
 	Text string
 	Date *time.Time
@@ -10,5 +11,5 @@ type Tweet struct {
 
 func NewTweet(user string, text string) *Tweet {
 	date := time.Now()
-	return &Tweet{user, text,  &date}
+	return &Tweet{0, user, text,  &date}
 }

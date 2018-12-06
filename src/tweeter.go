@@ -40,7 +40,7 @@ func main() {
 
 	shell.AddCmd(&ishell.Cmd{
 		Name: "showTweet",
-		Help: "Shows a tweet",
+		Help: "Shows a tweet, given its tweetID",
 		Func: func(c *ishell.Context) {
 
 			defer c.ShowPrompt(true)
@@ -49,13 +49,61 @@ func main() {
 
 			id, _ := strconv.Atoi(c.ReadLine())
 
-			tweet := service.GetTweetById(id)
+			tweet, err := service.GetTweetById(id)
 
 			if tweet == nil {
-				c.Printf("There's no tweet with tweetID %d\n", id)
+				c.Printf("%s", err)
 			}
 
 			c.Println(tweet)
+
+			return
+		},
+	})
+
+	shell.AddCmd(&ishell.Cmd{
+		Name: "showTweetCount",
+		Help: "Shows how many tweets a user has published",
+		Func: func(c *ishell.Context) {
+
+			defer c.ShowPrompt(true)
+
+			c.Print("Write your username: ")
+
+			user := c.ReadLine()
+
+			count, err := service.CountTweetsByUser(user)
+
+			c.Printf("Error: %s\n", err)
+			return
+
+			c.Printf("%d tweets by %s\n", count, user)
+
+			return
+		},
+	})
+
+	shell.AddCmd(&ishell.Cmd{
+		Name: "showTweets",
+		Help: "Shows a list of the tweets a user has published",
+		Func: func(c *ishell.Context) {
+
+			defer c.ShowPrompt(true)
+
+			c.Print("Write your username: ")
+
+			user := c.ReadLine()
+
+			tweets, err := service.GetTweetsByUser(user)
+
+			if err != nil {
+				c.Printf("Error: %s\n", err)
+				return
+			}
+
+			for _, tweet := range tweets {
+				c.Printf("User %s tweeted '%s' at %s\n", tweet.User, tweet.Text, tweet.Date)
+			}
 
 			return
 		},

@@ -13,6 +13,7 @@ func isValidTweet( t *testing.T, tweet *domain.Tweet, id int, user string, text 
 func TestPublishedTweetIsSaved(t *testing.T) {
 
 	//Initialization
+	service.InitializeService()
 	var tweet *domain.Tweet
 	user := "grupoesfera"
 	text := "This is my first tweet"
@@ -22,7 +23,7 @@ func TestPublishedTweetIsSaved(t *testing.T) {
 	service.PublishTweet(tweet)
 
 	//Validation
-	publishedTweet := service.GetTweets()[0]
+	publishedTweet := service.GetTweets()["grupoesfera"][0]
 	if publishedTweet.User != user &&
 		publishedTweet.Text != text {
 		t.Errorf("Expected tweet is %s: %s \nbut is %s: %s",
@@ -37,6 +38,7 @@ func TestPublishedTweetIsSaved(t *testing.T) {
 
 func TestTweetWithoutUserIsNotPublished( t *testing.T) {
 	//Initialization
+	service.InitializeService()
 	var tweet *domain.Tweet
 
 	var user string
@@ -56,6 +58,7 @@ func TestTweetWithoutUserIsNotPublished( t *testing.T) {
 
 func TestTweetWithoutTextIsNotPublished( t *testing.T) {
 	//Initialization
+	service.InitializeService()
 	var tweet *domain.Tweet
 
 	user := "gponce"
@@ -75,6 +78,7 @@ func TestTweetWithoutTextIsNotPublished( t *testing.T) {
 
 func TestTweetWhichExceeding140CharactersIsNotPublished( t *testing.T) {
 	//Initialization
+	service.InitializeService()
 	var tweet *domain.Tweet
 
 	user := "gponce"
@@ -115,15 +119,15 @@ func TestCanPublishAndRetrieveMoreThanOneTweet( t *testing.T) {
 		return
 	}
 
-	firstPublishedTweet := publishedTweets[0]
-	secondPublishedTweet := publishedTweets[1]
+	firstPublishedTweet := publishedTweets["Juan"][0]
+	secondPublishedTweet := publishedTweets["Juan"][0]
 
 
-	if !isValidTweet(t, &firstPublishedTweet, id1, user1, text1) {
+	if !isValidTweet(t, firstPublishedTweet, id1, user1, text1) {
 		return
 	}
 
-	if !isValidTweet(t, &secondPublishedTweet, id2, user2, text2) {
+	if !isValidTweet(t, secondPublishedTweet, id2, user2, text2) {
 		return
 	}
 
@@ -135,6 +139,7 @@ func TestCanRetrieveTweetById( t *testing.T) {
 
 	var tweet *domain.Tweet
 	var id int
+	var err error
 
 	user := "grupoesfera"
 	text := "This is my first tweet"
@@ -145,7 +150,97 @@ func TestCanRetrieveTweetById( t *testing.T) {
 	id, _ = service.PublishTweet(tweet)
 
 	//Validation
-	publishedTweet, _ := service.GetTweetById(id)
+	publishedTweet, err := service.GetTweetById(id)
 
-	isValidTweet(t, publishedTweet, id, user, text)
+	if err != nil {
+		t.Errorf("Did not expect error, but Error: %s at tweetID %d", err, id)
+	}
+
+	if publishedTweet != tweet {
+		t.Errorf("Expected tweets are not equal")
+	}
+
+	if !isValidTweet(t, publishedTweet, id, user, text) {
+		return
+	}
+
+	publishedTweet, _ = service.GetTweetById(-1)
+
+	if publishedTweet != nil {
+		t.Errorf("Expected tweet should be nil")
+		return
+	}
+}
+
+func TestCanCountTheTweetsSentByAnUser( t *testing.T) {
+	//Initialization
+	service.InitializeService()
+	var tweet, secondTweet, thirdTweet *domain.Tweet
+
+	user := "grupoesfera"
+	anotherUser := "nick"
+
+	text := "this is my first tweet"
+	secondText := "this is my second tweet"
+
+	tweet = domain.NewTweet(user, text)
+	secondTweet = domain.NewTweet(user, secondText)
+	thirdTweet = domain.NewTweet(anotherUser, text)
+
+	_, _ = service.PublishTweet(tweet)
+	_, _ = service.PublishTweet(secondTweet)
+	_, _ = service.PublishTweet(thirdTweet)
+
+	//Operation
+	count, _ := service.CountTweetsByUser(user)
+
+	//Validation
+	if count != 2 {
+		t.Errorf("Expected count is 2 but was %d", count)
+	}
+}
+
+func TestCanRetrieveTheTweetsSentByAnUser(t *testing.T) {
+	//Initialization
+	service.InitializeService()
+
+	var tweet, secondTweet, thirdTweet *domain.Tweet
+	user := "grupoesfera"
+	anotherUser := "nick"
+
+	text := "This is my first tweet"
+	secondText := "this is my second tweet"
+
+	tweet = domain.NewTweet(user, text)
+	secondTweet = domain.NewTweet(user, secondText)
+	thirdTweet = domain.NewTweet(anotherUser, text)
+
+	_, _ = service.PublishTweet(tweet)
+	_, _ = service.PublishTweet(secondTweet)
+	_, _ = service.PublishTweet(thirdTweet)
+
+	//operation
+	tweets, _ := service.GetTweetsByUser(user)
+
+	//Validation
+	if len(tweets) != 2 {
+		t.Errorf("Expected count is 2 but was %d", len(tweets))
+	}
+
+	firstPublishedTweet := tweets[0]
+	secondPublishedTweet := tweets[1]
+
+	if tweet != firstPublishedTweet || secondTweet != secondPublishedTweet {
+		t.Errorf("The tweets don't match")
+	}
+}
+
+func TestRetrieveUserTweetsShouldErrorWhenNoUserFound(t *testing.T) {
+	//Initialization
+	service.InitializeService()
+
+	if _, err := service.GetTweetsByUser("prueba"); err == nil {
+		t.Errorf("Expected username error")
+	}
+
 }
