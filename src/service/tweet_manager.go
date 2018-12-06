@@ -5,27 +5,43 @@ import (
 	"github.com/GastonNPMeli/Twitter/src/domain"
 )
 
-var Tweet domain.Tweet
+var Tweets []domain.Tweet
 
-func PublishTweet(newTweet *domain.Tweet) (err error) {
+func InitializeService() {
+	Tweets = []domain.Tweet {}
+}
+
+func PublishTweet(newTweet *domain.Tweet) (tweetID int, err error) {
 
 	if newTweet.User == "" {
-		return errors.New("user is required")
+		return -1, errors.New("user is required")
 	}
 
 	if newTweet.Text == "" {
-		return errors.New("text is required")
+		return -1, errors.New("text is required")
 	}
 
 	if len(newTweet.Text) > 140 {
-		return errors.New("len can't be more than 140 chars")
+		return -1, errors.New("len can't be more than 140 chars")
 	}
 
-	Tweet = *newTweet
+	Tweets = append(Tweets, *newTweet)
 
-	return err
+	return len(Tweets), err
 }
 
-func GetTweet() domain.Tweet {
-	return Tweet
+func GetTweets() []domain.Tweet {
+	return Tweets
 }
+
+func GetTweetById(id int) *domain.Tweet {
+
+	if id < len(Tweets) && id >= 0 {
+		return &Tweets[id - 1]
+	}
+
+	return nil
+}
+
+
+

@@ -6,6 +6,10 @@ import (
 	"testing"
 )
 
+func isValidTweet( t *testing.T, tweet *domain.Tweet, id int, user string, text string) bool {
+	return tweet != nil && user != "" && text != "" && id != -1 && tweet.Text == text && tweet.User == user
+}
+
 func TestPublishedTweetIsSaved(t *testing.T) {
 
 	//Initialization
@@ -18,7 +22,7 @@ func TestPublishedTweetIsSaved(t *testing.T) {
 	service.PublishTweet(tweet)
 
 	//Validation
-	publishedTweet := service.GetTweet()
+	publishedTweet := service.GetTweets()[0]
 	if publishedTweet.User != user &&
 		publishedTweet.Text != text {
 		t.Errorf("Expected tweet is %s: %s \nbut is %s: %s",
@@ -42,7 +46,7 @@ func TestTweetWithoutUserIsNotPublished( t *testing.T) {
 
 	//Operation
 	var err error
-	err = service.PublishTweet(tweet)
+	_, err = service.PublishTweet(tweet)
 
 	//Validation
 	if err != nil && err.Error() != "user is required" {
@@ -61,7 +65,7 @@ func TestTweetWithoutTextIsNotPublished( t *testing.T) {
 
 	//Operation
 	var err error
-	err = service.PublishTweet(tweet)
+	_, err = service.PublishTweet(tweet)
 
 	//Validation
 	if err != nil && err.Error() != "text is required" {
@@ -80,10 +84,68 @@ func TestTweetWhichExceeding140CharactersIsNotPublished( t *testing.T) {
 
 	//Operation
 	var err error
-	err = service.PublishTweet(tweet)
+	_, err = service.PublishTweet(tweet)
 
 	//Validation
 	if err != nil && err.Error() != "len can't be more than 140 chars" {
 		t.Error("Expected error is len can't be more than 140 chars")
 	}
+}
+
+func TestCanPublishAndRetrieveMoreThanOneTweet( t *testing.T) {
+	//Initialization
+	service.InitializeService()
+	var id1, id2 int
+	user1 := "Juan"
+	text1 := "Hola soy Juan"
+	user2 := "Pedro"
+	text2 := "Te faltó una coma, Juan."
+
+	tweet := domain.NewTweet(user1, text1)
+	secondTweet := domain.NewTweet(user2, text2)
+
+	//Operation
+	id1, _ = service.PublishTweet(tweet)
+	id2, _ = service.PublishTweet(secondTweet)
+
+	//Validation
+	publishedTweets := service.GetTweets()
+	if len(publishedTweets) != 2 {
+		t.Errorf("Expected size is 2 but was %d", len(publishedTweets))
+		return
+	}
+
+	firstPublishedTweet := publishedTweets[0]
+	secondPublishedTweet := publishedTweets[1]
+
+
+	if !isValidTweet(t, &firstPublishedTweet, id1, user1, text1) {
+		return
+	}
+
+	if !isValidTweet(t, &secondPublishedTweet, id2, user2, text2) {
+		return
+	}
+
+}
+
+func TestCanRetrieveTweetById( t *testing.T) {
+	//Initialization
+	service.InitializeService()
+
+	var tweet *domain.Tweet
+	var id int
+
+	user := "grupoesfera"
+	text := "This is my first tweet"
+
+	tweet = domain.NewTweet(user, text)
+
+	//Operation
+	id, _ = service.PublishTweet(tweet)
+
+	//Validation
+	publishedTweet := service.GetTweetById(id)
+
+	isValidTweet(t, publishedTweet, id, user, text)
 }
