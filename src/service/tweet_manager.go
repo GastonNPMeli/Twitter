@@ -34,13 +34,13 @@ func GetTweets() []domain.Tweet {
 	return Tweets
 }
 
-func GetTweetById(id int) *domain.Tweet {
+func GetTweetById(id int) (tweet *domain.Tweet, err error) {
 
-	if id < len(Tweets) && id >= 0 {
-		return &Tweets[id - 1]
+	if id <= len(Tweets) && id > 0 {
+		return &Tweets[id - 1], nil
 	}
 
-	return nil
+	return nil, errors.New("Invalid tweetID")
 }
 
 

@@ -145,7 +145,7 @@ func TestCanRetrieveTweetById( t *testing.T) {
 	id, _ = service.PublishTweet(tweet)
 
 	//Validation
-	publishedTweet := service.GetTweetById(id)
+	publishedTweet, _ := service.GetTweetById(id)
 
 	isValidTweet(t, publishedTweet, id, user, text)
 }

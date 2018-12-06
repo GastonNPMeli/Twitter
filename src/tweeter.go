@@ -4,6 +4,7 @@ import (
 	"github.com/GastonNPMeli/Twitter/src/domain"
 	"github.com/GastonNPMeli/Twitter/src/service"
 	"github.com/abiosoft/ishell"
+	"strconv"
 )
 
 func main() {
@@ -44,7 +45,15 @@ func main() {
 
 			defer c.ShowPrompt(true)
 
-			tweet := service.GetTweet()
+			c.Print("Write your tweetID: ")
+
+			id, _ := strconv.Atoi(c.ReadLine())
+
+			tweet := service.GetTweetById(id)
+
+			if tweet == nil {
+				c.Printf("There's no tweet with tweetID %d\n", id)
+			}
 
 			c.Println(tweet)
 
