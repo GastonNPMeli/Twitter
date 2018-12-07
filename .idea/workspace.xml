@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c43cc823-761f-41e0-9fff-dcc5883c727c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/domain/tweet_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/domain/tweet.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/tweet.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/service/tweet_manager.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/tweet_manager.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/service/tweet_manager_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/tweet_manager_test.go" afterDir="false" />
@@ -21,23 +23,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/service/tweet_manager_test.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="143" column="25" lean-forward="true" selection-start-line="143" selection-start-column="25" selection-end-line="143" selection-end-column="25" />
-              <folding>
-                <element signature="e#22#136#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/service/tweet_manager.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="254">
-              <caret line="49" column="33" lean-forward="true" selection-start-line="49" selection-start-column="33" selection-end-line="49" selection-end-column="33" />
+            <state relative-caret-position="554">
+              <caret line="38" lean-forward="true" selection-start-line="38" selection-end-line="38" />
               <folding>
                 <element signature="e#17#83#0" expanded="true" />
               </folding>
@@ -46,19 +36,13 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file:///usr/local/go/src/testing/testing.go">
+        <entry file="file://$PROJECT_DIR$/src/service/tweet_manager_test.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="177">
-              <caret line="791" selection-start-line="791" selection-end-line="791" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file:///usr/local/go/src/builtin/builtin.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="415">
-              <caret line="237" column="26" selection-start-line="237" selection-start-column="26" selection-end-line="237" selection-end-column="26" />
+            <state relative-caret-position="285">
+              <caret line="19" column="34" selection-start-line="19" selection-start-column="34" selection-end-line="19" selection-end-column="34" />
+              <folding>
+                <element signature="e#22#136#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -66,17 +50,29 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/domain/tweet.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" column="14" selection-start-line="11" selection-start-column="14" selection-end-line="11" selection-end-column="14" />
+            <state relative-caret-position="-15">
+              <caret line="63" column="17" lean-forward="true" selection-start-line="63" selection-start-column="17" selection-end-line="63" selection-end-column="17" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/domain/tweet_test.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="525">
+              <caret line="35" column="47" selection-start-line="35" selection-start-column="47" selection-end-line="35" selection-end-column="47" />
+              <folding>
+                <element signature="e#21#108#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/tweeter.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-22">
-              <caret line="80" lean-forward="true" selection-start-line="80" selection-end-line="80" />
+            <state relative-caret-position="1245">
+              <caret line="88" column="18" selection-start-line="88" selection-start-column="18" selection-end-line="88" selection-end-column="18" />
             </state>
           </provider>
         </entry>
@@ -90,6 +86,18 @@
       </list>
     </option>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>service.InitializeService()</find>
+      <find>service.</find>
+      <find>NewTextTweetManager</find>
+      <find>Print</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>tweetManager.</replace>
+      <replace>NewTweetManager</replace>
+    </replaceStrings>
+  </component>
   <component name="GOROOT" path="/usr/local/go" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -97,10 +105,11 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+        <option value="$PROJECT_DIR$/src/domain/tweet_test.go" />
         <option value="$PROJECT_DIR$/src/domain/tweet.go" />
-        <option value="$PROJECT_DIR$/src/tweeter.go" />
-        <option value="$PROJECT_DIR$/src/service/tweet_manager.go" />
         <option value="$PROJECT_DIR$/src/service/tweet_manager_test.go" />
+        <option value="$PROJECT_DIR$/src/service/tweet_manager.go" />
+        <option value="$PROJECT_DIR$/src/tweeter.go" />
       </list>
     </option>
   </component>
@@ -113,7 +122,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -130,12 +138,19 @@
               <item name="Twitter" type="b2602c69:ProjectViewProjectNode" />
               <item name="Twitter" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="domain" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Twitter" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Twitter" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="service" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -161,7 +176,18 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Go Test.go test github.com/GastonNPMeli/Twitter/src/service">
+  <component name="RunManager" selected="Go Test.go test github.com/GastonNPMeli/Twitter/src/domain">
+    <configuration name="TestCanGetAPrintableTweet in github.com/GastonNPMeli/Twitter/src/domain" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="Twitter" />
+      <working_directory value="$PROJECT_DIR$/src/domain" />
+      <framework value="gotest" />
+      <kind value="PACKAGE" />
+      <package value="github.com/GastonNPMeli/Twitter/src/domain" />
+      <directory value="$PROJECT_DIR$/" />
+      <filePath value="$PROJECT_DIR$/" />
+      <pattern value="^TestCanGetAPrintableTweet$" />
+      <method v="2" />
+    </configuration>
     <configuration name="TestCanPublishAndRetrieveMoreThanOneTweet in github.com/GastonNPMeli/Twitter/src/service" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="Twitter" />
       <working_directory value="$PROJECT_DIR$/src/service" />
@@ -184,26 +210,14 @@
       <pattern value="^TestPublishedTweetIsSaved$" />
       <method v="2" />
     </configuration>
-    <configuration name="TestTweetWithoutTextIsNotPublished in github.com/GastonNPMeli/Twitter/src/service" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+    <configuration name="go test github.com/GastonNPMeli/Twitter/src/domain" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="Twitter" />
-      <working_directory value="$PROJECT_DIR$/src/service" />
+      <working_directory value="$PROJECT_DIR$/src/domain" />
       <framework value="gotest" />
       <kind value="PACKAGE" />
-      <package value="github.com/GastonNPMeli/Twitter/src/service" />
+      <package value="github.com/GastonNPMeli/Twitter/src/domain" />
       <directory value="$PROJECT_DIR$/" />
       <filePath value="$PROJECT_DIR$/" />
-      <pattern value="^TestTweetWithoutTextIsNotPublished$" />
-      <method v="2" />
-    </configuration>
-    <configuration name="TestTweetWithoutUserIsNotPublished in github.com/GastonNPMeli/Twitter/src/service" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
-      <module name="Twitter" />
-      <working_directory value="$PROJECT_DIR$/src/service" />
-      <framework value="gotest" />
-      <kind value="PACKAGE" />
-      <package value="github.com/GastonNPMeli/Twitter/src/service" />
-      <directory value="$PROJECT_DIR$/" />
-      <filePath value="$PROJECT_DIR$/" />
-      <pattern value="^TestTweetWithoutUserIsNotPublished$" />
       <method v="2" />
     </configuration>
     <configuration name="go test github.com/GastonNPMeli/Twitter/src/service" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
@@ -218,51 +232,51 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Go Test.go test github.com/GastonNPMeli/Twitter/src/domain" />
         <item itemvalue="Go Test.go test github.com/GastonNPMeli/Twitter/src/service" />
+        <item itemvalue="Go Test.TestCanGetAPrintableTweet in github.com/GastonNPMeli/Twitter/src/domain" />
         <item itemvalue="Go Test.TestPublishedTweetIsSaved in github.com/GastonNPMeli/Twitter/src/service" />
         <item itemvalue="Go Test.TestCanPublishAndRetrieveMoreThanOneTweet in github.com/GastonNPMeli/Twitter/src/service" />
-        <item itemvalue="Go Test.TestTweetWithoutTextIsNotPublished in github.com/GastonNPMeli/Twitter/src/service" />
-        <item itemvalue="Go Test.TestTweetWithoutUserIsNotPublished in github.com/GastonNPMeli/Twitter/src/service" />
       </list>
     </recent_temporary>
   </component>
   <component name="TestHistory">
-    <history-entry file="go_test_github_com_GastonNPMeli_Twitter_src_service - 2018.12.06 at 12h 56m 09s.xml">
+    <history-entry file="go_test_github_com_GastonNPMeli_Twitter_src_domain - 2018.12.07 at 10h 47m 42s.xml">
+      <configuration name="go test github.com/GastonNPMeli/Twitter/src/domain" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="go_test_github_com_GastonNPMeli_Twitter_src_domain - 2018.12.07 at 10h 50m 08s.xml">
+      <configuration name="go test github.com/GastonNPMeli/Twitter/src/domain" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="go_test_github_com_GastonNPMeli_Twitter_src_domain - 2018.12.07 at 10h 50m 24s.xml">
+      <configuration name="go test github.com/GastonNPMeli/Twitter/src/domain" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="go_test_github_com_GastonNPMeli_Twitter_src_domain - 2018.12.07 at 10h 50m 52s.xml">
+      <configuration name="go test github.com/GastonNPMeli/Twitter/src/domain" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="go_test_github_com_GastonNPMeli_Twitter_src_service - 2018.12.07 at 10h 51m 08s.xml">
       <configuration name="go test github.com/GastonNPMeli/Twitter/src/service" configurationId="GoTestRunConfiguration" />
     </history-entry>
-    <history-entry file="go_test_github_com_GastonNPMeli_Twitter_src_service - 2018.12.06 at 12h 56m 47s.xml">
+    <history-entry file="go_test_github_com_GastonNPMeli_Twitter_src_service - 2018.12.07 at 11h 11m 23s.xml">
       <configuration name="go test github.com/GastonNPMeli/Twitter/src/service" configurationId="GoTestRunConfiguration" />
     </history-entry>
-    <history-entry file="go_test_github_com_GastonNPMeli_Twitter_src_service - 2018.12.06 at 12h 57m 21s.xml">
+    <history-entry file="go_test_github_com_GastonNPMeli_Twitter_src_domain - 2018.12.07 at 11h 11m 28s.xml">
+      <configuration name="go test github.com/GastonNPMeli/Twitter/src/domain" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="go_test_github_com_GastonNPMeli_Twitter_src_service - 2018.12.07 at 11h 13m 04s.xml">
       <configuration name="go test github.com/GastonNPMeli/Twitter/src/service" configurationId="GoTestRunConfiguration" />
     </history-entry>
-    <history-entry file="go_test_github_com_GastonNPMeli_Twitter_src_service - 2018.12.06 at 12h 58m 23s.xml">
+    <history-entry file="go_test_github_com_GastonNPMeli_Twitter_src_service - 2018.12.07 at 11h 31m 43s.xml">
       <configuration name="go test github.com/GastonNPMeli/Twitter/src/service" configurationId="GoTestRunConfiguration" />
     </history-entry>
-    <history-entry file="go_test_github_com_GastonNPMeli_Twitter_src_service - 2018.12.06 at 12h 59m 32s.xml">
-      <configuration name="go test github.com/GastonNPMeli/Twitter/src/service" configurationId="GoTestRunConfiguration" />
-    </history-entry>
-    <history-entry file="go_test_github_com_GastonNPMeli_Twitter_src_service - 2018.12.06 at 13h 42m 24s.xml">
-      <configuration name="go test github.com/GastonNPMeli/Twitter/src/service" configurationId="GoTestRunConfiguration" />
-    </history-entry>
-    <history-entry file="go_test_github_com_GastonNPMeli_Twitter_src_service - 2018.12.06 at 13h 42m 36s.xml">
-      <configuration name="go test github.com/GastonNPMeli/Twitter/src/service" configurationId="GoTestRunConfiguration" />
-    </history-entry>
-    <history-entry file="go_test_github_com_GastonNPMeli_Twitter_src_service - 2018.12.06 at 13h 42m 50s.xml">
-      <configuration name="go test github.com/GastonNPMeli/Twitter/src/service" configurationId="GoTestRunConfiguration" />
-    </history-entry>
-    <history-entry file="go_test_github_com_GastonNPMeli_Twitter_src_service - 2018.12.06 at 13h 43m 09s.xml">
-      <configuration name="go test github.com/GastonNPMeli/Twitter/src/service" configurationId="GoTestRunConfiguration" />
-    </history-entry>
-    <history-entry file="go_test_github_com_GastonNPMeli_Twitter_src_service - 2018.12.06 at 13h 44m 28s.xml">
-      <configuration name="go test github.com/GastonNPMeli/Twitter/src/service" configurationId="GoTestRunConfiguration" />
+    <history-entry file="go_test_github_com_GastonNPMeli_Twitter_src_domain - 2018.12.07 at 11h 31m 49s.xml">
+      <configuration name="go test github.com/GastonNPMeli/Twitter/src/domain" configurationId="GoTestRunConfiguration" />
     </history-entry>
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25679544" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2639485" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -277,12 +291,34 @@
       <window_info anchor="bottom" id="Version Control" order="9" />
       <window_info anchor="bottom" id="Terminal" order="10" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
-      <window_info anchor="right" id="Coverage" side_tool="true" weight="0.3297568" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Database" order="3" />
+      <window_info anchor="right" id="Coverage" order="4" side_tool="true" weight="0.3297568" />
     </layout>
+    <layout-to-restore>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2639485" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32891566" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Database Changes" order="8" />
+      <window_info anchor="bottom" id="Version Control" order="9" />
+      <window_info anchor="bottom" id="Terminal" order="10" />
+      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Database" order="3" />
+      <window_info anchor="right" id="Coverage" order="4" side_tool="true" weight="0.3297568" />
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -292,17 +328,10 @@
     <option name="LAST_COMMIT_MESSAGE" value="Added Tweet" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/domain/tweet.go">
+    <entry file="file:///usr/local/go/src/builtin/builtin.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="14" selection-start-line="11" selection-start-column="14" selection-end-line="11" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/tweeter.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-22">
-          <caret line="80" lean-forward="true" selection-start-line="80" selection-end-line="80" />
+        <state relative-caret-position="415">
+          <caret line="237" column="26" selection-start-line="237" selection-start-column="26" selection-end-line="237" selection-end-column="26" />
         </state>
       </provider>
     </entry>
@@ -313,17 +342,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file:///usr/local/go/src/builtin/builtin.go">
+    <entry file="file://$PROJECT_DIR$/src/domain/tweet.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="415">
-          <caret line="237" column="26" selection-start-line="237" selection-start-column="26" selection-end-line="237" selection-end-column="26" />
+        <state relative-caret-position="-15">
+          <caret line="63" column="17" lean-forward="true" selection-start-line="63" selection-start-column="17" selection-end-line="63" selection-end-column="17" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/service/tweet_manager.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="254">
-          <caret line="49" column="33" lean-forward="true" selection-start-line="49" selection-start-column="33" selection-end-line="49" selection-end-column="33" />
+        <state relative-caret-position="554">
+          <caret line="38" lean-forward="true" selection-start-line="38" selection-end-line="38" />
           <folding>
             <element signature="e#17#83#0" expanded="true" />
           </folding>
@@ -332,11 +361,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/service/tweet_manager_test.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="143" column="25" lean-forward="true" selection-start-line="143" selection-start-column="25" selection-end-line="143" selection-end-column="25" />
+        <state relative-caret-position="285">
+          <caret line="19" column="34" selection-start-line="19" selection-start-column="34" selection-end-line="19" selection-end-column="34" />
           <folding>
             <element signature="e#22#136#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/domain/tweet_test.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="525">
+          <caret line="35" column="47" selection-start-line="35" selection-start-column="47" selection-end-line="35" selection-end-column="47" />
+          <folding>
+            <element signature="e#21#108#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tweeter.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1245">
+          <caret line="88" column="18" selection-start-line="88" selection-start-column="18" selection-end-line="88" selection-end-column="18" />
         </state>
       </provider>
     </entry>

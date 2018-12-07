@@ -5,49 +5,55 @@ import (
 	"github.com/GastonNPMeli/Twitter/src/domain"
 )
 
-var Tweets map[string][]*domain.Tweet
-var tweetCount int
-
-func InitializeService() {
-	Tweets = make(map[string][]*domain.Tweet)
-	tweetCount = 1
+type tweetManager struct{
+	Tweets map[string][]domain.Tweet
+	TweetCount *int
 }
 
-func PublishTweet(newTweet *domain.Tweet) (tweetID int, err error) {
+func NewTweetManager() tweetManager {
+	tweetCount := 0
+	newTweetManager := tweetManager{
+		make(map[string][]domain.Tweet),
+		&tweetCount,
+	}
+	return newTweetManager
+}
 
-	if newTweet.User == "" {
+func (tm tweetManager) PublishTweet(newTweet domain.Tweet) (tweetID int, err error) {
+
+	if newTweet.GetUser() == "" {
 		return -1, errors.New("user is required")
 	}
 
-	if newTweet.Text == "" {
+	if newTweet.GetText() == "" {
 		return -1, errors.New("text is required")
 	}
 
-	if len(newTweet.Text) > 140 {
+	if len(newTweet.GetText()) > 140 {
 		return -1, errors.New("len can't be more than 140 chars")
 	}
 
-	if Tweets[newTweet.User] == nil {
-		Tweets[newTweet.User] = make([]*domain.Tweet,0)
+	if tm.Tweets[newTweet.GetUser()] == nil {
+		tm.Tweets[newTweet.GetUser()] = make([]domain.Tweet,0)
 	}
 
-	newTweet.TweetId = tweetCount
-	tweetCount++
-	Tweets[newTweet.User] = append(Tweets[newTweet.User], newTweet)
+	*tm.TweetCount++
+	newTweet.SetTweetId(*tm.TweetCount)
+	tm.Tweets[newTweet.GetUser()] = append(tm.Tweets[newTweet.GetUser()], newTweet)
 
-	return len(Tweets), err
+	return newTweet.GetTweetId(), err
 }
 
-func GetTweets() map[string][]*domain.Tweet {
-	return Tweets
+func (tm tweetManager) GetTweets() map[string][]domain.Tweet {
+	return tm.Tweets
 }
 
-func GetTweetById(id int) (tweet *domain.Tweet, err error) {
+func (tm tweetManager) GetTweetById(id int) (tweet *domain.Tweet, err error) {
 
-	for _, value := range Tweets {
+	for _, value := range tm.Tweets {
 		for _, tweet := range value {
-			if tweet.TweetId == id {
-				return tweet, nil
+			if tweet.GetTweetId() == id {
+				return &tweet, nil
 			}
 		}
 	}
@@ -55,17 +61,17 @@ func GetTweetById(id int) (tweet *domain.Tweet, err error) {
 	return nil, errors.New("invalid tweetID")
 }
 
-func CountTweetsByUser(user string) (tweetCount int, err error) {
-	tweets, err := GetTweetsByUser(user)
+func (tm tweetManager) CountTweetsByUser(user string) (tweetCount int, err error) {
+	tweets, err := tm.GetTweetsByUser(user)
 	return len(tweets), err
 }
 
-func GetTweetsByUser(user string) (userTweets []*domain.Tweet, err error) {
-	if _, exists := Tweets[user]; !exists {
+func (tm tweetManager) GetTweetsByUser(user string) (userTweets []domain.Tweet, err error) {
+	if _, exists := tm.Tweets[user]; !exists {
 		return nil, errors.New("invalid username")
 	}
 
-	return Tweets[user], nil
+	return tm.Tweets[user], nil
 }
 
 

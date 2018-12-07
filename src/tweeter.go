@@ -9,13 +9,15 @@ import (
 
 func main() {
 
+	tweetManager := service.NewTweetManager()
+
 	shell := ishell.New()
 	shell.SetPrompt("Tweeter >> ")
 	shell.Print("Type 'help' to know commands\n")
 
 	shell.AddCmd(&ishell.Cmd{
-		Name: "publishTweet",
-		Help: "Publishes a tweet",
+		Name: "publishTextTweet",
+		Help: "Publishes a text tweet",
 		Func: func(c *ishell.Context) {
 
 			defer c.ShowPrompt(true)
@@ -28,9 +30,69 @@ func main() {
 
 			text := c.ReadLine()
 
-			var tweet = domain.NewTweet(user, text)
+			var tweet = domain.NewTextTweet(user, text)
 
-			service.PublishTweet(tweet)
+			tweetManager.PublishTweet(tweet)
+
+			c.Print("Tweet sent\n")
+
+			return
+		},
+	})
+
+	shell.AddCmd(&ishell.Cmd{
+		Name: "publishImageTweet",
+		Help: "Publishes an image tweet",
+		Func: func(c *ishell.Context) {
+
+			defer c.ShowPrompt(true)
+
+			c.Print("Write your user: ")
+
+			user := c.ReadLine()
+
+			c.Print("Write your tweet: ")
+
+			text := c.ReadLine()
+
+			c.Print("Write your image url: ")
+
+			image := c.ReadLine()
+
+			var tweet = domain.NewImageTweet(user, text, image)
+
+			tweetManager.PublishTweet(tweet)
+
+			c.Print("Tweet sent\n")
+
+			return
+		},
+	})
+
+	shell.AddCmd(&ishell.Cmd{
+		Name: "publishQuotedTweet",
+		Help: "Publishes a quoted tweet",
+		Func: func(c *ishell.Context) {
+
+			defer c.ShowPrompt(true)
+
+			c.Print("Write your user: ")
+
+			user := c.ReadLine()
+
+			c.Print("Write your tweet: ")
+
+			text := c.ReadLine()
+
+			c.Print("Write the TweetId of the tweet you want to quote: ")
+
+			id, _ := strconv.Atoi(c.ReadLine())
+
+			quotedTweet, _ := tweetManager.GetTweetById(id)
+
+			var tweet = domain.NewQuoteTweet(user, text, *quotedTweet)
+
+			id, _ = tweetManager.PublishTweet(tweet)
 
 			c.Print("Tweet sent\n")
 
@@ -49,13 +111,13 @@ func main() {
 
 			id, _ := strconv.Atoi(c.ReadLine())
 
-			tweet, err := service.GetTweetById(id)
+			tweet, err := tweetManager.GetTweetById(id)
 
 			if tweet == nil {
 				c.Printf("%s", err)
 			}
 
-			c.Println(tweet)
+			c.Println((*tweet).PrintableTweet())
 
 			return
 		},
@@ -72,10 +134,7 @@ func main() {
 
 			user := c.ReadLine()
 
-			count, err := service.CountTweetsByUser(user)
-
-			c.Printf("Error: %s\n", err)
-			return
+			count, _ := tweetManager.CountTweetsByUser(user)
 
 			c.Printf("%d tweets by %s\n", count, user)
 
@@ -94,7 +153,7 @@ func main() {
 
 			user := c.ReadLine()
 
-			tweets, err := service.GetTweetsByUser(user)
+			tweets, err := tweetManager.GetTweetsByUser(user)
 
 			if err != nil {
 				c.Printf("Error: %s\n", err)
@@ -102,7 +161,7 @@ func main() {
 			}
 
 			for _, tweet := range tweets {
-				c.Printf("User %s tweeted '%s' at %s\n", tweet.User, tweet.Text, tweet.Date)
+				c.Printf("Tweet %d: %s\n", tweet.GetTweetId(), tweet.PrintableTweet())
 			}
 
 			return
