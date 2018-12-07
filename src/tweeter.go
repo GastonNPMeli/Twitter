@@ -9,7 +9,9 @@ import (
 
 func main() {
 
-	tweetManager := service.NewTweetManager()
+
+	tweetWriter := service.NewFileTweetWriter()
+	tweetManager := service.NewTweetManager(tweetWriter)
 
 	shell := ishell.New()
 	shell.SetPrompt("Tweeter >> ")
@@ -162,6 +164,35 @@ func main() {
 
 			for _, tweet := range tweets {
 				c.Printf("Tweet %d: %s\n", tweet.GetTweetId(), tweet.PrintableTweet())
+			}
+
+			return
+		},
+	})
+
+	shell.AddCmd(&ishell.Cmd{
+		Name: "showTweetsContainingText",
+		Help: "Shows a list of the tweets with a given token",
+		Func: func(c *ishell.Context) {
+
+			defer c.ShowPrompt(true)
+
+			c.Print("Write your match query: ")
+
+			query := c.ReadLine()
+
+			searchResult := make(chan domain.Tweet, 100)
+			tweetManager.SearchTweetsContaining(query, searchResult)
+
+			go func() {
+				for tweet := range searchResult {
+					c.Println(tweet.PrintableTweet())
+				}
+			}()
+
+			if searchResult == nil {
+				c.Printf("No tweets containing '%s' found\n", query)
+				return
 			}
 
 			return
