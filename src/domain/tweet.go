@@ -1,6 +1,9 @@
 package domain
 
-import "time"
+import (
+	"strconv"
+	"time"
+)
 
 type Tweet interface {
 	PrintableTweet() string
@@ -49,15 +52,15 @@ func NewQuoteTweet(user string, text string, quotedTweet Tweet) *QuoteTweet {
 }
 
 func (t TextTweet) PrintableTweet() string {
-	return "@" + t.User + ": " + t.Text
+	return "TweetID " + strconv.Itoa(t.TweetId) +  " -> @" + t.User + ": " + t.Text
 }
 
 func (t ImageTweet) PrintableTweet() string {
-	return "@" + t.User + ": " + t.Text + " " + t.Image
+	return "TweetID " + strconv.Itoa(t.TweetId) +  " -> @" + t.User + ": " + t.Text + " " + t.Image
 }
 
 func (t QuoteTweet) PrintableTweet() string {
-	return "@" + t.User + ": " + t.Text + " \"" + t.QuotedTweet.PrintableTweet() + "\""
+	return "TweetID " + strconv.Itoa(t.TweetId) +  " -> @" + t.User + ": " + t.Text + " \"" + t.QuotedTweet.PrintableTweet() + "\""
 }
 
 func (t TextTweet) GetUser() string {

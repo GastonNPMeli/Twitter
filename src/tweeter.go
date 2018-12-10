@@ -9,9 +9,11 @@ import (
 
 func main() {
 
-
 	tweetWriter := service.NewFileTweetWriter()
 	tweetManager := service.NewTweetManager(tweetWriter)
+
+	router := service.NewGinRouter(tweetManager)
+	router.StartGinRouter()
 
 	shell := ishell.New()
 	shell.SetPrompt("Tweeter >> ")
@@ -190,7 +192,7 @@ func main() {
 				}
 			}()
 
-			if searchResult == nil {
+			if searchResult == nil || <-searchResult == nil {
 				c.Printf("No tweets containing '%s' found\n", query)
 				return
 			}
@@ -200,5 +202,7 @@ func main() {
 	})
 
 	shell.Run()
-
 }
+
+
+

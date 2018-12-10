@@ -17,15 +17,15 @@ type FileTweetWriter struct {
 	TweetList *os.File
 }
 
-type tweetManager struct{
+type TweetManager struct{
 	Tweets map[string][]domain.Tweet
 	TweetCount *int
 	TweetWriter
 }
 
-func NewTweetManager(tWritter TweetWriter) tweetManager {
+func NewTweetManager(tWritter TweetWriter) TweetManager {
 	tweetCount := 0
-	newTweetManager := tweetManager{
+	newTweetManager := TweetManager{
 		make(map[string][]domain.Tweet),
 		&tweetCount,
 		tWritter,
@@ -38,7 +38,7 @@ func NewFileTweetWriter() *FileTweetWriter {
 	return &FileTweetWriter{fi}
 }
 
-func (tm tweetManager) PublishTweet(newTweet domain.Tweet) (tweetID int, err error) {
+func (tm TweetManager) PublishTweet(newTweet domain.Tweet) (tweetID int, err error) {
 
 	if newTweet.GetUser() == "" {
 		return -1, errors.New("user is required")
@@ -65,11 +65,11 @@ func (tm tweetManager) PublishTweet(newTweet domain.Tweet) (tweetID int, err err
 	return newTweet.GetTweetId(), err
 }
 
-func (tm tweetManager) GetTweets() map[string][]domain.Tweet {
+func (tm TweetManager) GetTweets() map[string][]domain.Tweet {
 	return tm.Tweets
 }
 
-func (tm tweetManager) GetTweetById(id int) (tweet *domain.Tweet, err error) {
+func (tm TweetManager) GetTweetById(id int) (tweet *domain.Tweet, err error) {
 
 	for _, value := range tm.Tweets {
 		for _, tweet := range value {
@@ -82,12 +82,12 @@ func (tm tweetManager) GetTweetById(id int) (tweet *domain.Tweet, err error) {
 	return nil, errors.New("invalid tweetID")
 }
 
-func (tm tweetManager) CountTweetsByUser(user string) (tweetCount int, err error) {
+func (tm TweetManager) CountTweetsByUser(user string) (tweetCount int, err error) {
 	tweets, err := tm.GetTweetsByUser(user)
 	return len(tweets), err
 }
 
-func (tm tweetManager) GetTweetsByUser(user string) (userTweets []domain.Tweet, err error) {
+func (tm TweetManager) GetTweetsByUser(user string) (userTweets []domain.Tweet, err error) {
 	if _, exists := tm.Tweets[user]; !exists {
 		return nil, errors.New("invalid username")
 	}
@@ -95,7 +95,7 @@ func (tm tweetManager) GetTweetsByUser(user string) (userTweets []domain.Tweet, 
 	return tm.Tweets[user], nil
 }
 
-func (tm tweetManager) SearchTweetsContaining (query string, ch chan domain.Tweet) {
+func (tm TweetManager) SearchTweetsContaining (query string, ch chan domain.Tweet) {
 	go func() {
 		found := false
 

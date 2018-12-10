@@ -295,7 +295,6 @@ func TestCanSearchForTweetContainingText(t *testing.T) {
 	var tweetWriter service.TweetWriter
 	tweetWriter = service.NewFileTweetWriter()
 	tweetManager := service.NewTweetManager(tweetWriter)
-	// Create and publish a tweet
 
 	tweet := domain.NewTextTweet("Juan", "Esto es muy raro")
 	_, _ = tweetManager.PublishTweet(tweet)
@@ -315,4 +314,22 @@ func TestCanSearchForTweetContainingText(t *testing.T) {
 	if !strings.Contains(foundTweet.GetText(), query) {
 		t.Errorf("Expected to find %s, found %s", query, foundTweet.GetText())
 	}
+}
+
+func TestChannelIsNULLIfThereAreNoMatchingTweets(t *testing.T) {
+	// Initialization
+	var tweetWriter service.TweetWriter
+	tweetWriter = service.NewFileTweetWriter()
+	tweetManager := service.NewTweetManager(tweetWriter)
+
+	// Operation
+	searchResult := make(chan domain.Tweet)
+	query := ""
+	tweetManager.SearchTweetsContaining(query, searchResult)
+
+	go func() {
+		if searchResult != nil {
+			t.Errorf("Expected to find no tweets")
+		}
+	}()
 }
