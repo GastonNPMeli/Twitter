@@ -60,7 +60,7 @@ func (t ImageTweet) PrintableTweet() string {
 }
 
 func (t QuoteTweet) PrintableTweet() string {
-	return "TweetID " + strconv.Itoa(t.TweetId) +  " -> @" + t.User + ": " + t.Text + " \"" + t.QuotedTweet.PrintableTweet() + "\""
+	return "TweetID " + strconv.Itoa(t.TweetId) +  " -> @" + t.User + ": " + t.Text + " \"" +  t.QuotedTweet.PrintableTweet() + "\""
 }
 
 func (t TextTweet) GetUser() string {

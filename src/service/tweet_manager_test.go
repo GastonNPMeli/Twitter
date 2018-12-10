@@ -316,20 +316,17 @@ func TestCanSearchForTweetContainingText(t *testing.T) {
 	}
 }
 
-func TestChannelIsNULLIfThereAreNoMatchingTweets(t *testing.T) {
-	// Initialization
-	var tweetWriter service.TweetWriter
-	tweetWriter = service.NewFileTweetWriter()
-	tweetManager := service.NewTweetManager(tweetWriter)
+func BenchmarkPublishWithFileTweetWriter(b *testing.B) {
+	//Initialization
+	fileTweetWriter := service.NewFileTweetWriter()
+	tweetManager := service.NewTweetManager(fileTweetWriter)
 
-	// Operation
-	searchResult := make(chan domain.Tweet)
-	query := ""
-	tweetManager.SearchTweetsContaining(query, searchResult)
+	tweet := domain.NewTextTweet("grupoesfera", "This is my tweet")
 
-	go func() {
-		if searchResult != nil {
-			t.Errorf("Expected to find no tweets")
-		}
-	}()
+	//Opertaion
+	for n := 0; n < b.N; n++ {
+		tweetManager.PublishTweet(tweet)
+	}
+
+	
 }

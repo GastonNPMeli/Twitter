@@ -100,7 +100,15 @@ func (r *Router) GetUserTweetCount(c * gin.Context) {
 
 func (r *Router) PublishTextTweet(c * gin.Context) {
 	var publishTextTweetCmd PublishTextTweetCommand
-	c.BindJSON(&publishTextTweetCmd)
+	if err := c.ShouldBindJSON(&publishTextTweetCmd); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	if len(publishTextTweetCmd.User) == 0 || len(publishTextTweetCmd.Text) == 0 {
+		c.JSON(http.StatusBadRequest, "Missing Parameters")
+		return
+	}
 
 	newTweet := domain.NewTextTweet(publishTextTweetCmd.User, publishTextTweetCmd.Text)
 	r.Tw.PublishTweet(newTweet)
@@ -109,7 +117,15 @@ func (r *Router) PublishTextTweet(c * gin.Context) {
 
 func (r *Router) PublishImageTweet(c * gin.Context) {
 	var publishImageTweetCmd PublishImageTweetCommand
-	c.BindJSON(&publishImageTweetCmd)
+	if err := c.ShouldBindJSON(&publishImageTweetCmd); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	if len(publishImageTweetCmd.User) == 0 || len(publishImageTweetCmd.Text) == 0 || len(publishImageTweetCmd.Image) == 0 {
+		c.JSON(http.StatusBadRequest, "Missing Parameters")
+		return
+	}
 
 	newTweet := domain.NewImageTweet(publishImageTweetCmd.User, publishImageTweetCmd.Text, publishImageTweetCmd.Image)
 	r.Tw.PublishTweet(newTweet)
@@ -118,10 +134,23 @@ func (r *Router) PublishImageTweet(c * gin.Context) {
 
 func (r *Router) PublishQuoteTweet(c * gin.Context) {
 	var publishQuoteTweetCmd PublishQuoteTweetCommand
-	c.BindJSON(&publishQuoteTweetCmd)
+	if err := c.ShouldBindJSON(&publishQuoteTweetCmd); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	if len(publishQuoteTweetCmd.User) == 0 || len(publishQuoteTweetCmd.Text) == 0 || len(publishQuoteTweetCmd.QuotedTweetId) == 0 {
+		c.JSON(http.StatusBadRequest, "Missing Parameters")
+		return
+	}
 
 	quotedTweetId, _ := strconv.Atoi(publishQuoteTweetCmd.QuotedTweetId)
 	quotedTweet, _ := r.Tw.GetTweetById(quotedTweetId)
+
+	if quotedTweet == nil {
+		c.JSON(http.StatusBadRequest, "No Tweet with provided ID found.")
+		return
+	}
 
 	newTweet := domain.NewQuoteTweet(publishQuoteTweetCmd.User, publishQuoteTweetCmd.Text, *quotedTweet)
 	r.Tw.PublishTweet(newTweet)
